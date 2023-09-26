@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Station Kiosk</title>
+    <link rel="stylesheet" href="styles/quest.css">
+</head>
+<body>
+    <div class="main" id="Main">
+        <h1 id="CCOQ">Frequently Asked Questions</h1>
+        <div class="CategoryContainer" style="flex-direction: column;min-width:700px;overflow-y: scroll;padding: 30px;row-gap: 5px;">
+            <div class="Category" id="Category1" onclick="SelectQuestion('Departure')">
+                <h2>What is the scheduled departure time of the train from its origin station?</h2>
+            </div>
+            <div class="Category" id="Category2" onclick="SelectQuestion('Location')">
+                <h2>Are there any scheduled stops or layovers along the train route, and if so, what are their durations?</h2>
+            </div>
+            <div class="Category" id="Category3" onclick="SelectQuestion('TA')">
+                <h2>Does the train have a regular daily schedule, or does it operate on specific days or times?</h2>
+            </div>
+            <div class="Category" id="Category4" onclick="SelectQuestion('TrainStatus')">
+                <h2>Are there any upcoming changes to the train's timetable or schedule that passengers should be aware of?</h2>
+            </div>
+            <div class="Category" id="Category5" onclick="SelectQuestion('')">
+                <h2>Are there any peak or off-peak hours for this train service, and how do the timings differ during these periods?</h2>
+            </div>
+        </div>
+   
+    
+    </div>
+    <script>
+        const searchParams = new URLSearchParams(window.location.search);
+        const params = Array.from(searchParams.values());
+        if(params[1]=='Tamil'){
+            document.getElementById('CCOQ').innerHTML = 'அடிக்கடி கேட்கப்படும் கேள்விகள்';
+            document.getElementById('Category1').innerHTML='<h2>ரயில் அதன் தொடக்க நிலையத்திலிருந்து புறப்படும் திட்டமிடப்பட்ட நேரம் என்ன?</h2>';
+            document.getElementById('Category2').innerHTML='<h2>ரயில் பாதையில் ஏதேனும் திட்டமிடப்பட்ட நிறுத்தங்கள் அல்லது இடமாற்றங்கள் உள்ளதா, அப்படியானால், அவற்றின் கால அளவு என்ன?</h2>';
+            document.getElementById('Category3').innerHTML='<h2>ரயிலுக்கு வழக்கமான தினசரி அட்டவணை உள்ளதா அல்லது குறிப்பிட்ட நாட்கள் அல்லது நேரங்களில் இயக்கப்படுகிறதா?</h2>';
+            document.getElementById('Category4').innerHTML='<h2>ரயிலின் கால அட்டவணை அல்லது அட்டவணையில் வரவிருக்கும் மாற்றங்கள் ஏதேனும் உள்ளதா?</h2>';
+            document.getElementById('Category5').innerHTML='<h2>இந்த ரயில் சேவையில் பீக் அல்லது ஆஃப்-பீக் நேரம் ஏதேனும் உள்ளதா, இந்தக் காலகட்டங்களில் நேரங்கள் எவ்வாறு வேறுபடுகின்றன?</h2>';
+        }
+        function SelectQuestion(ques){
+            window.location.href = "ans.html?ques="+ques+"&lang="+params[1];
+        }
+        
+        
+    </script>
+</body>
+</html>

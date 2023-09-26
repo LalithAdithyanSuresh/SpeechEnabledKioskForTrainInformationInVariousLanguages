@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Station Kiosk</title>
+    <link rel="stylesheet" href="styles/index.css">
+</head>
+<body>
+    <div class="popupHolder" id="popupHolderConver">
+        <div class="popup">
+            <h1>Select Preferred Mode of Conversation</h1>
+            <div class="CardCointainer">
+                <div class="LScard" onclick="SelectConver('Talking');">Talking</div>
+                <div class="LScard" onclick="SelectConver('Touch');">Touch Screen</div>
+            </div>
+        </div>
+    </div>
+    <div class="popupHolder Hidden" id="popupHolderLanguage">
+        <div class="popup">
+            <h1>Select Preferred Language</h1>
+            <div class="CardCointainer">
+                <div class="LScard" onclick="SelectLanguage('English');">English</div>
+                <div class="LScard" onclick="SelectLanguage('Hindi');">हिंदी</div>
+                <div class="LScard" onclick="SelectLanguage('Tamil');">தமிழ்</div>
+            </div>
+        </div>
+    </div>
+    <div class="main Hidden" id="Main">
+        <h1 id="CCOQ">Choose Category<br>of Queries</h1>
+        <div class="CategoryContainer">
+            <div class="Category" id="Category1" onclick="SelectCategory('Timings')">
+                <h2>Timings</h2>
+            </div>
+            <div class="Category" id="Category2" onclick="SelectCategory('Location')">
+                <h2>Location</h2>
+            </div>
+            <div class="Category" id="Category3" onclick="SelectCategory('TA')">
+                <h2>Ticket Availabilty</h2>
+            </div>
+            <div class="Category" id="Category4" onclick="SelectCategory('TrainStatus')">
+                <h2>Train Status</h2>
+            </div>
+            <div class="Category" id="Category5" onclick="SelectCategory('')">
+                <h2>Food</h2>
+            </div>
+        </div>
+   
+    
+    </div>
+    <script>
+        function SelectConver(mode){
+            const ConverMode = mode;
+            document.getElementById('popupHolderConver').classList.add('Hidden');
+            document.getElementById('popupHolderLanguage').classList.remove('Hidden');
+        }
+    function SelectLanguage(lang){
+            const PopHolder = document.getElementById('popupHolderLanguage');
+            PopHolder.classList.add('Hidden');
+            setTimeout(function(){PopHolder.style.display = 'none';
+            document.getElementById('Main').classList.remove('Hidden');},500);
+            console.log(lang);
+            Slang = lang;
+            if(lang=='Tamil'){
+                document.getElementById('CCOQ').innerHTML = 'வகையைத் தேர்ந்தெடுக்கவும் வினாக்கள்';
+                document.getElementById('Category1').innerHTML='<h2>நேரங்கள்</h2>';
+                document.getElementById('Category2').innerHTML='<h2>இடம்</h2>';
+                document.getElementById('Category3').innerHTML='<h2>டிக்கெட் கிடைக்கும்</h2>';
+                document.getElementById('Category4').innerHTML='<h2>ரயில்களின் நிலை</h2>';
+                document.getElementById('Category5').innerHTML='<h2>உணவு</h2>';
+            }
+        }
+        // function ChangeLanguage(lang){
+        //     doucument.getElementById('CCOQ').innerHTML = 
+        // }
+
+var Slang = 'English';
+        function GetLanguage(lang){
+            var xhr = new XMLHttpRequest();
+            var url = 'php/GetPhrase.php';
+            var data = new FormData();
+            data.append('language', lang); // Change 'variableName' to your variable name
+            xhr.open('POST', url, true);
+            xhr.onreadystatechange = function () {
+                if (xhr.readyState === 4 && xhr.status === 200) {
+                    var responseData = JSON.parse(xhr.responseText);
+                    console.log(responseData);
+                }
+            };
+            xhr.send(data);
+        }
+        GetLanguage('English');
+        function SelectCategory(cat){
+            window.location.href = "quest.html?cat="+cat+"&lang="+Slang;
+        }
+    </script>
+</body>
+</html>

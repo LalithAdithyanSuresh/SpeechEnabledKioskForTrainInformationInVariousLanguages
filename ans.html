@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Station Kiosk</title>
+    <link rel="stylesheet" href="styles/ans.css">
+</head>
+<body>
+    <div class="main" id="Main">
+        <h1 id="CCOQ">Scheduled Departure for:</h1>
+            <input type="text" id="Train" placeholder="Enter Train No." class="inputBox">
+            <button onclick="submit()" id="Submit">Submit</button>
+        <h3 id="Ans"></h3>
+    
+    </div>
+    <script>
+        const searchParams = new URLSearchParams(window.location.search);
+        const params = Array.from(searchParams.values());
+
+        if(params[1]=='Tamil'){
+            document.getElementById('Submit').innerHTML = 'சமர்ப்பிக்க';
+            document.getElementById('Train').placeholder = 'ரயில் எண்ணை உள்ளிடவும்';
+            document.getElementById('CCOQ').innerHTML = 'திட்டமிடப்பட்ட புறப்பாடு:';
+            document.getElementById('Category1').innerHTML='<h2>ரயில் அதன் தொடக்க நிலையத்திலிருந்து புறப்படும் திட்டமிடப்பட்ட நேரம் என்ன?</h2>';
+            document.getElementById('Category2').innerHTML='<h2>ரயில் பாதையில் ஏதேனும் திட்டமிடப்பட்ட நிறுத்தங்கள் அல்லது இடமாற்றங்கள் உள்ளதா, அப்படியானால், அவற்றின் கால அளவு என்ன?</h2>';
+            document.getElementById('Category3').innerHTML='<h2>ரயிலுக்கு வழக்கமான தினசரி அட்டவணை உள்ளதா அல்லது குறிப்பிட்ட நாட்கள் அல்லது நேரங்களில் இயக்கப்படுகிறதா?</h2>';
+            document.getElementById('Category4').innerHTML='<h2>ரயிலின் கால அட்டவணை அல்லது அட்டவணையில் வரவிருக்கும் மாற்றங்கள் ஏதேனும் உள்ளதா?</h2>';
+            document.getElementById('Category5').innerHTML='<h2>இந்த ரயில் சேவையில் பீக் அல்லது ஆஃப்-பீக் நேரம் ஏதேனும் உள்ளதா, இந்தக் காலகட்டங்களில் நேரங்கள் எவ்வாறு வேறுபடுகின்றன?</h2>';
+        }
+        function SelectQuestion(ques){
+            window.location.href = "ans.html?ques="+ques+"&lang="+params[1];
+        }
+        function submit(){
+            var PNRnum ='0';
+            if(document.getElementById('Train').innerHTML != PNRnum){
+                var PNRnum = document.getElementById('Train').value;
+            let x = Math.floor((Math.random() * 12) + 1);
+            let w ='';
+            if(params[1]=='Tamil'){
+                w = 'ரயில் புறப்படும் நேரம் : ';
+            }else{
+                w='Train Depart at : '
+            }
+            let y = Math.floor((Math.random() * 59) + 1);
+            let z = Math.floor((Math.random() * 2) + 1);
+            if(z>1){
+            if(y<=9){
+                document.getElementById('Ans').innerHTML = w+x+':0'+y+' PM';
+                
+            }else{
+            document.getElementById('Ans').innerHTML = w+x+':'+y+' PM';}}else{if(y<=9){
+                document.getElementById('Ans').innerHTML = w+x+':0'+y+' AM';
+                
+            }else{
+            document.getElementById('Ans').innerHTML = w+x+':'+y+' AM';}}}
+            var PNRnum = document.getElementById('Train').value;
+            var data = {'PNRnum':PNRnum};
+            fetch('http://129.154.41.7:5000/api/getTrainInfo', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(data)
+        })
+        .then(response => response.json())
+        .then(data => {
+            // Handle the response from the server
+            const result = data.result;
+            console.log('Result from Python:', result);
+        })
+        .catch(error => {
+            console.error('Error:', error);
+        }); }
+    </script>
+</body>
+</html>

@@ -1,0 +1,125 @@
+body{
+    margin: 0;
+    width: 100vw;
+    background-image: url("../assets/trainBG.jpg");
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-size: cover;
+    backdrop-filter: blur(10px) brightness(0.4);
+
+    height: 100vh;
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    font-size: 35px;
+}
+.popupHolder{
+    font-size: 30px;
+    display: flex;
+    width: 100vw;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    height: 100vh;
+    transition: 0.5s;
+}
+.popup{
+    z-index: 100;
+
+    background-color: rgb(75, 108, 161);
+    border-radius: 10px;
+    padding: 40px;
+    color: white;
+    box-shadow: 10px 10px 10px 10px rgba(0,0,0,0);
+}
+h1{
+    width:100%;
+margin: 0px 0px 40px 0px;
+    text-align: center;
+}
+.CardCointainer{
+    margin-top: 50px;
+    width: 100%;
+    display: flex;
+    column-gap: 10px;
+    justify-content: center;
+    flex-wrap: wrap;
+    flex-direction: row;
+}
+.LScard{
+    padding: 20px;
+    min-width: 200px;
+    cursor: pointer;
+    border-radius: 15px;
+    background-color: rgb(0, 39, 138);
+    text-align: center;
+}
+.LScard:hover{
+    background-color: rgb(1, 27, 92);   
+}
+
+.main{
+    margin: 0 auto;
+    max-width: 1200px;
+    color: white;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    transition: 0.2s;
+}
+
+
+.CategoryContainer{
+    margin-top: 30px;
+    width: calc(100vw-100px);
+    height: calc(100vh-150px);
+    display: flex;
+    row-gap: 50px;
+    flex-wrap: wrap;
+    column-gap: 50px;
+    flex-direction: row;
+    justify-content: center;
+    align-items: stretch;
+}
+.Category{
+    min-width: 200px;
+    max-width:250px;
+    font-size: 25px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 30px;
+    text-wrap: wrap;
+    cursor: pointer;
+    background-color: rgb(75, 108, 161);
+    border-radius: 10px;
+    transition: 0.2s;
+}
+.CategoryQuest{
+    font-size: 25px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 30px;
+    text-wrap: wrap;
+    cursor: pointer;
+    background-color: rgb(75, 108, 161);
+    border-radius: 10px;
+    transition: 0.2s;
+    max-height: 20px;
+    width: calc(100%-60px);
+}
+.CategoryQuest:hover{
+    background-color: rgb(0, 39, 138);
+}
+.Category:hover{
+    background-color: rgb(0, 39, 138);
+}
+h2{margin: 0;text-align: center;}
+
+
+
+
+.Hidden{
+    opacity: 0;
+}
